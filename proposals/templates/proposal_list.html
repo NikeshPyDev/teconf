@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proposals</title>
+</head>
+<body>
+    <form method="post">
+    {% csrf_token %}
+        <a class="lean" href="{% url 'proposals:new_proposal' %}">New Proposal</a>
+    {% for proposal in proposals %}
+      <p>
+        {{ proposal }}</a> <br>
+      </p>
+    {% endfor %}
+  </form>
+</body>
+</html>

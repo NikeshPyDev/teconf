@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit New Proposal</title>
+    {% load bootstrap_tags %}
+    {% load static %}
+    {{ form.media }}
+    <!--<script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/tinymce/custom.js' %}" ></script>-->
+
+</head>
+<body>
+    <form >
+      {% csrf_token %}
+      {{ form.as_p }}
+    </form>
+</body>
+</html>

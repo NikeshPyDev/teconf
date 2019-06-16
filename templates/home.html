@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+             <p class="display-4">Hello, {{ user.username }}</p>
+			 <a class="lead" href="{% url 'proposals:proposal_types' %}">Submit A Proposal</a>
+	{% else %}
+             <a class="lead" href="{% url 'login' %}">Log in</a>/<a class="lead" href="{% url 'signup' %}">Signup</a>
+	{% endif %}
+{% endblock content %}
