@@ -11,9 +11,13 @@
 
 </head>
 <body>
-    <form >
+    <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
+        <div class="modal-footer">
+		        <button type="submit" id="confirm_ok" class="btn btn-success">Ok</button>
+		        <button type="button" id="confirm_discard" class="btn btn-default">Discard</button>
+		      </div>
     </form>
 </body>
 </html>

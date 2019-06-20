@@ -26,8 +26,7 @@ class ProposalListView(FormView):
             'proposal_type': proposal_type,
             'proposals': []
         }
-        if proposal_type:
-            data['proposals'] = Proposals.objects.filter(proposal_type=proposal_type)
+        data['proposals'] = Proposals.objects.all()
         return render(request, 'proposal_list.html', {'data': data})
 
 
@@ -37,4 +36,15 @@ class ProposalView(TemplateView):
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, 'proposal_create.html', {'form': form})
+
+
+    def post(self, request, *args, **kwargs):
+        proposal_form = self.form_class(request.POST)
+        proposal = proposal_form.save()
+        proposal.save()
+        data = {
+            'proposal_type': proposal.proposal_type,
+            'proposals': Proposals.objects.all()
+        }
+        return render(request, 'proposal_list.html', {'data': data})
 

@@ -31,7 +31,7 @@ def signup(request):
             # return redirect('account_activation_sent')
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=raw_password)
+            authenticate(username=username, password=raw_password)
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return render(request, 'home.html')
     else:

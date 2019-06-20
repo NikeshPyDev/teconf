@@ -5,12 +5,12 @@
     <title>Proposals</title>
 </head>
 <body>
-    <form method="post">
+    <form>
     {% csrf_token %}
         <a class="lean" href="{% url 'proposals:new_proposal' %}">New Proposal</a>
-    {% for proposal in proposals %}
+    {% for proposal in data.proposals %}
       <p>
-        {{ proposal }}</a> <br>
+        <a href="">{{ proposal.title }}</a> <br>
       </p>
     {% endfor %}
   </form>
