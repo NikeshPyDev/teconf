@@ -38,7 +38,7 @@ class ProposalView(TemplateView):
         proposal_type = kwargs.get('proposal_type', None)
         bread_crumbs = []
         if proposal_type:
-            bread_crumbs.append({'url': proposal_type,'label': dict(PROPOSAL_TYPES)[proposal_type]})
+            bread_crumbs.append({'url': '/' + proposal_type,'label': dict(PROPOSAL_TYPES)[proposal_type]})
         if proposal_id is not None:
             proposal = Proposals.objects.get(id=proposal_id)
             bread_crumbs.append({'url': proposal.id, 'label': proposal.title})
@@ -46,7 +46,7 @@ class ProposalView(TemplateView):
         else:
             bread_crumbs.append({'url': 'new_proposal', 'label': 'New'})
             proposal_form = self.form_class(prefix='proposal')            
-        return render(request, 'proposal_create.html', {'form': proposal_form})
+        return render(request, 'proposal_create.html', {'form': proposal_form, 'bread_crumbs': bread_crumbs})
 
 
     def post(self, request, *args, **kwargs):
@@ -58,7 +58,6 @@ class ProposalView(TemplateView):
         data = {
             'proposal_type': proposal.proposal_type,
             'proposals': Proposals.objects.all(),
-            'bread_crumbs': bread_crumbs
         }
-        return render(request, 'proposal_list.html', {'data': data})
+        return render(request, 'proposal_list.html', {'data': data, 'bread_crumbs': bread_crumbs})
 
