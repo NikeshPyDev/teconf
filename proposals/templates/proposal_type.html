@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Submit a Proposal</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <form method="post">
     {% csrf_token %}
     {% for p_type in proposal_types %}
@@ -13,5 +9,4 @@
       </p>
     {% endfor %}
   </form>
-</body>
-</html>
+{% endblock %}

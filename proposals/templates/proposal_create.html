@@ -6,18 +6,69 @@
     {% load bootstrap_tags %}
     {% load static %}
     {{ form.media }}
+    <link href="{% static 'css/app.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css" />
     <!--<script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>-->
     <!--<script type="text/javascript" src="{% static 'js/tinymce/custom.js' %}" ></script>-->
 
 </head>
 <body>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-        <div class="modal-footer">
-		        <button type="submit" id="confirm_ok" class="btn btn-success">Ok</button>
-		        <button type="button" id="confirm_discard" class="btn btn-default">Discard</button>
-		      </div>
-    </form>
+    <div class="col-lg-12">
+
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>New Proposal</h2>
+                    <hr/>
+                    <div class="form-container space-2-bottom">
+                        <form name="Proposal" id="new_or_edit_proposal" enctype="multipart/form-data" method="post" action="{{ request.get_full_path }}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="modal-footer">
+                                    <button type="submit" id="confirm_ok" class="btn btn-success">Ok</button>
+                                    <button type="button" id="confirm_discard" class="btn btn-default">Discard</button>
+                                  </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="col-lg-12">-->
+        <!--<form name="quiz" id="new_proposal" enctype="multipart/form-data" method="POST" action="{{ request.get_full_path }}">{% csrf_token %}-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-12">-->
+                    <!--<div class="app-create-block">-->
+                        <!--<div class="clearfix">-->
+                            <!--<div class="col-lg-6 col-sm-6 col-xs-12 mt-10">-->
+                                <!--<div class="gen_test-wrap">-->
+                                    <!--<label >{{ form.proposal.title.label }}<span style="color:#ff0000;"> *</span></label>-->
+                                        <!--{{ form.proposal.title }}-->
+
+                                        <!--<p class="hint-txt">{{ form.proposal.title.help_text }}</p>-->
+
+
+                                        <!--<span class="help-inline" style="color:red;">{{ form.proposal.title.errors }}</span>-->
+                                <!--</div>-->
+                             <!--</div>-->
+                             <!--<div class="col-lg-6 col-sm-6 col-xs-12 mt-10">-->
+                                <!--<div class="gen_test-wrap">-->
+                                    <!--<label>{{ form.proposal.description }}</label>-->
+
+                                    <!--<textarea style="display: none;" style="display: none;">{{ form.proposal.description }}</textarea>-->
+                                    <!--<p class="hint-txt">{{ forms.quiz.language.help_text}}</p>-->
+
+                                    <!--<span class="help-inline" style="color:red;">{{ forms.quiz.language.errors }}</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</form>-->
+<!--</div>-->
+
 </body>
 </html>

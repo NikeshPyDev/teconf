@@ -26,25 +26,39 @@ class ProposalListView(FormView):
             'proposal_type': proposal_type,
             'proposals': []
         }
-        data['proposals'] = Proposals.objects.all()
+        data['proposals'] = Proposals.objects.filter(proposal_type=proposal_type)
         return render(request, 'proposal_list.html', {'data': data})
 
 
 class ProposalView(TemplateView):
     form_class = ProposalForm
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, 'proposal_create.html', {'form': form})
+    def get(self, request, **kwargs):
+        proposal_id = kwargs.get('proposal_id', None)
+        proposal_type = kwargs.get('proposal_type', None)
+        bread_crumbs = []
+        if proposal_type:
+            bread_crumbs.append({'url': proposal_type,'label': dict(PROPOSAL_TYPES)[proposal_type]})
+        if proposal_id is not None:
+            proposal = Proposals.objects.get(id=proposal_id)
+            bread_crumbs.append({'url': proposal.id, 'label': proposal.title})
+            proposal_form = self.form_class(prefix='proposal',instance=proposal)
+        else:
+            bread_crumbs.append({'url': 'new_proposal', 'label': 'New'})
+            proposal_form = self.form_class(prefix='proposal')            
+        return render(request, 'proposal_create.html', {'form': proposal_form})
 
 
     def post(self, request, *args, **kwargs):
         proposal_form = self.form_class(request.POST)
         proposal = proposal_form.save()
         proposal.save()
+        bread_crumbs = [{'url': proposal.proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal.proposal_type]},
+                        {'url':proposal.id, 'label': proposal.title}]
         data = {
             'proposal_type': proposal.proposal_type,
-            'proposals': Proposals.objects.all()
+            'proposals': Proposals.objects.all(),
+            'bread_crumbs': bread_crumbs
         }
         return render(request, 'proposal_list.html', {'data': data})
 
