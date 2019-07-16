@@ -6,7 +6,7 @@
         <a class="lean" href="{% url 'proposals:new_proposal' data.proposal_type %}">New Proposal</a>
     {% for proposal in data.proposals %}
       <p>
-        <a href="{% url 'proposals:edit_proposal' proposal.proposal_type proposal.id  %}">{{ proposal.title }}</a> <br>
+        <a href="{% url 'proposals:view_proposal' proposal.proposal_type proposal.id  %}">{{ proposal.title }}</a> <br>
       </p>
     {% endfor %}
   </form>

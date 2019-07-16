@@ -1,5 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
+from datetime import datetime
+from django.contrib.auth.models import User
 # from conference import Conference
 
 # Create your models here.
@@ -22,3 +24,21 @@ class Proposals(models.Model):
     current_urls = HTMLField()
     speaker_info = HTMLField()
     speaker_links = HTMLField()
+    created_date = models.DateTimeField(default=datetime.now())
+    updated_date = models.DateTimeField(default=datetime.now())
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Proposals, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=datetime.now())
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text

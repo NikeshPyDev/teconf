@@ -31,6 +31,27 @@ class ProposalListView(FormView):
 
 
 class ProposalView(TemplateView):
+
+    form_class = ProposalForm
+
+    def get(self, request, *args, **kwargs):
+        proposal_id = kwargs.get('proposal_id', None)
+        proposal_type = kwargs.get('proposal_type', None)
+        bread_crumbs = []
+        editable = False
+        if proposal_type:
+            bread_crumbs.append({'url': '/' + proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal_type]})
+        if proposal_id is not None:
+            proposal = Proposals.objects.get(id=proposal_id)
+            bread_crumbs.append({'url': proposal.id, 'label': proposal.title})
+            editable = True if (proposal.author_id == request.user) else False
+            # proposal_form = self.form_class(instance=proposal)
+        else:
+            bread_crumbs.append({'url': 'new_proposal', 'label': 'New'})
+        return render(request, 'proposal_view.html', {'proposal': proposal, 'bread_crumbs': bread_crumbs, 'editable': editable})
+
+
+class ProposalEditView(TemplateView):
     form_class = ProposalForm
 
     def get(self, request, **kwargs):
@@ -42,22 +63,31 @@ class ProposalView(TemplateView):
         if proposal_id is not None:
             proposal = Proposals.objects.get(id=proposal_id)
             bread_crumbs.append({'url': proposal.id, 'label': proposal.title})
-            proposal_form = self.form_class(prefix='proposal',instance=proposal)
+            proposal_form = self.form_class(instance=proposal)
         else:
             bread_crumbs.append({'url': 'new_proposal', 'label': 'New'})
-            proposal_form = self.form_class(prefix='proposal')            
+            proposal_form = self.form_class()
         return render(request, 'proposal_create.html', {'form': proposal_form, 'bread_crumbs': bread_crumbs})
 
 
     def post(self, request, *args, **kwargs):
         proposal_form = self.form_class(request.POST)
-        proposal = proposal_form.save()
-        proposal.save()
-        bread_crumbs = [{'url': proposal.proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal.proposal_type]},
-                        {'url':proposal.id, 'label': proposal.title}]
-        data = {
-            'proposal_type': proposal.proposal_type,
-            'proposals': Proposals.objects.all(),
-        }
+        # import pdb
+        # pdb.set_trace()
+        data = {'proposal_type': 'talk',
+                'proposals': Proposals.objects.all()}
+        bread_crumbs = []
+        if proposal_form.is_valid():
+            proposal = proposal_form.save()
+            proposal.author_id = request.user
+            proposal.save()
+            bread_crumbs = [{'url': proposal.proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal.proposal_type]},
+                            {'url': proposal.id, 'label': proposal.title}]
+            data = {
+                'proposal_type': proposal.proposal_type,
+                'proposals': Proposals.objects.all(),
+            }
         return render(request, 'proposal_list.html', {'data': data, 'bread_crumbs': bread_crumbs})
+
+
 

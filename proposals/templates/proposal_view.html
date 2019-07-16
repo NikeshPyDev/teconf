@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row-fluid clearfix">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="custom-container">
+                <div class="proposal-details">
+                    <div class="row">
+                        <div class="col-sm-12 proposal-header">
+                            <h1 class="proposal-title">
+                                {{ proposal.title }}
+                            </h1>
+                        </div>
+                    </div>
+
+                    <hr class="hr-mini">
+                    <div class="row proposal-description">
+
+
+                        <section class="col-sm-8 proposal-writeup">
+                          <div class="proposal-writeup--section">
+                            <h4 class="heading"><b>Description:</b></h4>
+                            {{ proposal.description | safe}}
+                          </div>
+
+
+                          <div class="proposal-writeup--section">
+                            <h4 class="heading"><b>Prerequisites:</b></h4>
+                            {{ proposal.pre_requisites | safe }}
+                          </div>
+
+
+
+                          <div class="proposal-writeup--section">
+                            <h4 class="heading"><b>Content URLs:</b></h4>
+                              <p></p>{{ proposal.content_urls | safe}}<p></p>
+                          </div>
+
+
+
+
+
+                          <div class="proposal-writeup--section">
+                            <h4 class="heading"><b>Speaker Info:</b></h4>
+                            <p></p>{{ proposal.speaker_info | safe }}<p></p>
+                          </div>
+
+
+
+                          <div class="proposal-writeup--section">
+                            <h4 class="heading"><b>Speaker Links:</b></h4>
+                            <p></p>{{ proposal.speaker_links | safe }}<p></p>
+                          </div>
+
+
+
+
+                        </section>
+
+                        <section class="col-sm-3 proposal-meta">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Id:</small></td>
+                                        <td>{{ proposal.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Author:</small></td>
+                                        <td>{{ proposal.author_id }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Section:</small></td>
+                                        <td>{{ proposal.proposal_section }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Type:</small></td>
+                                        <td>{{ proposal.proposal_type }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Target Audience:</small></td>
+                                        <td>
+                                            {{ proposal.audience }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted text-right"><small>Last Updated:</small></td>
+                                        <td>
+                                            <time datetime="{{ proposal.updated_date }}" title="{{ proposal.created_date }}">{{ proposal.updated_date }}</time>
+                                        </td>
+                                    </tr>
+                                    {% if editable %}
+                                    <tr>
+                                        <td class="text-muted text-right"><small></small></td>
+                                        <td>
+                                            <a href="{% url 'proposals:edit_proposal' proposal.proposal_type proposal.id  %}">Edit</a> <br>
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            <div class="social-share row text-center">
+
+
+
+
+                    <script src="https://apis.google.com/js/platproposal.js" async="" defer="" gapi_processed="true"></script>
+
+                </div>
+
+                        </section>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                          <div role="tabpanel" class="comments-and-reviews-panel" id="comments">
+                              <ul class="nav nav-tabs" role="tablist">
+                                  <li class="active" role="presentation" id="public-comments">
+                                      <a href="#js-comments" role="tab" data-toggle="tab">
+                                          <i class="fa fa-comments-o"></i>
+                                          Comments
+                                      </a>
+                                  </li>
+
+
+
+                              </ul>
+
+                              <div class="tab-content padded">
+
+
+
+
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     {{ form.media }}
-                    <h2>New Proposal</h2>
+                    {% if form.instance.id is undefined %}<h2>New Proposal</h2>{% endif %}
                     <hr/>
                     <div class="form-container space-2-bottom">
                         <form name="Proposal" id="new_or_edit_proposal" enctype="multipart/form-data" method="post" action="{{ request.get_full_path }}">
