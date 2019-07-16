@@ -9,6 +9,7 @@ class ProposalForm(forms.ModelForm):
         model = Proposals
 
         fields = [
+            "id",
             "title",
             "description",
             "audience",

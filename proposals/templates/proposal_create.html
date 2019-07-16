@@ -12,6 +12,7 @@
                     <div class="form-container space-2-bottom">
                         <form name="Proposal" id="new_or_edit_proposal" enctype="multipart/form-data" method="post" action="{{ request.get_full_path }}">
                             {% csrf_token %}
+                            <input type="hidden" name="proposal_id" value="{{ form.instance.id }}">
                             {{ form.as_p }}
                             <div class="modal-footer">
                                     <button type="submit" id="confirm_ok" class="btn btn-success">Ok</button>

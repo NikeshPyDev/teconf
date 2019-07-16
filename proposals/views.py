@@ -3,6 +3,7 @@ from .forms import *
 from .models import PROPOSAL_TYPES, Proposals
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
+from datetime import datetime
 
 
 def generate_prposal_type_url(p_type):
@@ -69,17 +70,22 @@ class ProposalEditView(TemplateView):
             proposal_form = self.form_class()
         return render(request, 'proposal_create.html', {'form': proposal_form, 'bread_crumbs': bread_crumbs})
 
-
     def post(self, request, *args, **kwargs):
         proposal_form = self.form_class(request.POST)
-        # import pdb
-        # pdb.set_trace()
+
         data = {'proposal_type': 'talk',
                 'proposals': Proposals.objects.all()}
         bread_crumbs = []
         if proposal_form.is_valid():
-            proposal = proposal_form.save()
-            proposal.author_id = request.user
+            if request.POST.get('proposal_id'):
+                # import pdb
+                # pdb.set_trace()
+                proposal = Proposals.objects.get(id=request.POST.get('proposal_id'))
+                self.form_class(request.POST, instance=proposal).save(commit=False)
+                proposal.updated_date = datetime.now()
+            else:
+                proposal = proposal_form.save(commit=False)
+                proposal.author_id = request.user
             proposal.save()
             bread_crumbs = [{'url': proposal.proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal.proposal_type]},
                             {'url': proposal.id, 'label': proposal.title}]

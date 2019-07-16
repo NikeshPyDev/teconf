@@ -24,9 +24,9 @@ class Proposals(models.Model):
     current_urls = HTMLField()
     speaker_info = HTMLField()
     speaker_links = HTMLField()
-    created_date = models.DateTimeField(default=datetime.now())
-    updated_date = models.DateTimeField(default=datetime.now())
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_date = models.DateTimeField()
+    updated_date = models.DateTimeField()
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 class Comment(models.Model):
