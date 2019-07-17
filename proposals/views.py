@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
-from .models import PROPOSAL_TYPES, Proposals
+from .models import PROPOSAL_TYPES, Proposals, Comment
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from datetime import datetime
@@ -39,17 +39,19 @@ class ProposalView(TemplateView):
         proposal_id = kwargs.get('proposal_id', None)
         proposal_type = kwargs.get('proposal_type', None)
         bread_crumbs = []
+        comments = []
         editable = False
         if proposal_type:
             bread_crumbs.append({'url': '/' + proposal_type, 'label': dict(PROPOSAL_TYPES)[proposal_type]})
         if proposal_id is not None:
             proposal = Proposals.objects.get(id=proposal_id)
+            comments = Comment.objects.filter(proposal=proposal_id)
             bread_crumbs.append({'url': proposal.id, 'label': proposal.title})
             editable = True if (proposal.author_id == request.user) else False
             # proposal_form = self.form_class(instance=proposal)
         else:
             bread_crumbs.append({'url': 'new_proposal', 'label': 'New'})
-        return render(request, 'proposal_view.html', {'proposal': proposal, 'bread_crumbs': bread_crumbs, 'editable': editable})
+        return render(request, 'proposal_view.html', {'proposal': proposal, 'bread_crumbs': bread_crumbs, 'editable': editable, 'comments': comments})
 
 
 class ProposalEditView(TemplateView):
@@ -94,6 +96,14 @@ class ProposalEditView(TemplateView):
                 'proposals': Proposals.objects.all(),
             }
         return render(request, 'proposal_list.html', {'data': data, 'bread_crumbs': bread_crumbs})
+
+
+def post_comments(request, proposal_type, proposal_id):
+    proposal = Proposals.objects.get(id=proposal_id)
+    text = request.POST.get('text')
+    comment = Comment(proposal=proposal, author=request.user, text=text)
+    comment.save()
+    return redirect('/proposals/'+proposal_type + '/' + str(proposal_id))
 
 
 

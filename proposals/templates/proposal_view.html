@@ -127,46 +127,45 @@
                                 </ul>
                                 <div class="tab-content padded">
                                     <div class="tab-pane active" id="js-comments" role="tabpanel">
+                                        {% for comment in comments %}
                                         <div class="panel panel-default comment-panel">
                                             <div class="panel-body">
-                                                <div class="comment-vote-panel text-center">
-                                                    <div class="text-center">
-                                                        <a href="#" data-url="/proposals/oposal_id /comments/ comment.i/up-vote/" class="btn-vote js-proposal-comment-upvote text-muted">
-                                                            <i class="fa fa-chevron-up"></i>
-                                                        </a>
-                                                        <h5 class="text-muted clear-margin vote-count">
-                                                            0
-                                                        </h5>
-                                                        <a href="#" data-url="/cfp/posters-2019/proposals/comment/machine-learning-security/comments/6616/down-vote/" class="btn-vote js-proposal-comment-downvote text-muted">
-                                                            <i class="fa fa-chevron-down"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                <!--<div class="comment-vote-panel text-center">-->
+                                                    <!--<div class="text-center">-->
+                                                        <!--<a href="#" data-url="/proposals/oposal_id /comments/ comment.i/up-vote/" class="btn-vote js-proposal-comment-upvote text-muted">-->
+                                                            <!--<i class="fa fa-chevron-up"></i>-->
+                                                        <!--</a>-->
+                                                        <!--<h5 class="text-muted clear-margin vote-count">-->
+                                                            <!--0-->
+                                                        <!--</h5>-->
+                                                        <!--<a href="#" data-url="/cfp/posters-2019/proposals/comment/machine-learning-security/comments/6616/down-vote/" class="btn-vote js-proposal-comment-downvote text-muted">-->
+                                                            <!--<i class="fa fa-chevron-down"></i>-->
+                                                        <!--</a>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
 
 
                                                 <div class="comment-description" id="comment-6616">
-                                                    <span><p>Was this intended to be talk or a poster?</p></span>
+                                                    <span><p>{{ comment.text }}</p></span>
 
-                                                    <a href="#" data-url="/cfp/posters-2019/proposals/comment/machine-learning-security/comments/6616/mark_spam/" class="js-mark-spam">Mark as spam</a><br><br>
-
-                                                    <b>Vijay Kumar (~bravegnu)</b>
+                                                    <b>{{ comment.author }}</b>
                                                     <small class="text-muted">
-                                                        <a href="#comment-6616" class="link-disguise"><time datetime="2019-07-02T00:00:11.866576+05:30">15 days ago</time></a>
+                                                        <a href="#" class="link-disguise"><time datetime="{{ comment.created_date }}">{{ comment.created_date }}</time></a>
                                                     </small>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        {% endfor %}
 
                                         <div class="add-comment-wrapper">
                                             <a href="#" class="js-add-comment">add a comment</a>
-                                            <form method="POST" class="new-comment js-new-comment-form" style="display:none;" action="/cfp/posters-2019/proposals/comment/machine-learning-security/create/">
-                                                <input type="hidden" name="csrfmiddlewaretoken" value="cVJ9vnwYRmkQYHCsCYZ32Ey7wXRf3wZZ">
-                                                <link href="/cfp/static/pagedown/demo/browser/demo.css" type="text/css" media="all" rel="stylesheet">
-                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Converter.js"></script>
-                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Sanitizer.js"></script>
-                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Editor.js"></script>
-                                                <script type="text/javascript" src="/cfp/static/pagedown_init.js"></script>
+                                            <form method="POST" class="new-comment js-new-comment-form" style="display:none;" action="{% url 'proposals:post_comment' proposal.proposal_type proposal.id %}">
+                                                {% csrf_token %}
+                                                <!--<link href="/cfp/static/pagedown/demo/browser/demo.css" type="text/css" media="all" rel="stylesheet">-->
+                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Converter.js"></script>-->
+                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Sanitizer.js"></script>-->
+                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Editor.js"></script>-->
+                                                <!--<script type="text/javascript" src="/cfp/static/pagedown_init.js"></script>-->
 
                                                 <div class="form-group required"><label class="control-label" for="id_comment">Comment</label>
                                                     <div class="wmd-wrapper" id="id_comment-wmd-wrapper">
@@ -214,7 +213,10 @@
                                                                     <!--</li>-->
                                                                 <!--</ul>-->
                                                             <!--</div>-->
-                                                            <textarea class="form-control wmd-input" cols="40" id="id_comment" name="comment" placeholder="Comment" required="required" rows="10" title=""></textarea>
+                                                            <textarea class="form-control wmd-input" cols="40" id="id_comment" name="text" placeholder="Comment" required="required" rows="10" title="">
+
+                                                            </textarea>
+
                                                         </div>
 
                                                         <div id="id_comment_wmd_preview" class="wmd-panel wmd-preview"></div>
@@ -222,12 +224,12 @@
                                                     </div>
                                                 </div>
 
-                                                <input id="id_private" name="private" type="hidden">
+                                                <input id="id_proposal_id" name="proposal_id" type="hidden" value="{{ proposal.id }}">
 
                                                 <input id="id_reviewer" name="reviewer" type="hidden">
 
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="submit" class="btn btn-primary" id="add_comment">
                                                         Add Comment
                                                     </button>
                                                     <button type="button" class="btn btn-default js-hide-comment-form">Cancel</button>
