@@ -116,31 +116,186 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                          <div role="tabpanel" class="comments-and-reviews-panel" id="comments">
-                              <ul class="nav nav-tabs" role="tablist">
-                                  <li class="active" role="presentation" id="public-comments">
-                                      <a href="#js-comments" role="tab" data-toggle="tab">
-                                          <i class="fa fa-comments-o"></i>
-                                          Comments
-                                      </a>
-                                  </li>
+                            <div role="tabpanel" class="comments-and-reviews-panel" id="comments">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active" role="presentation" id="public-comments">
+                                        <a href="#js-comments" role="tab" data-toggle="tab">
+                                            <i class="fa fa-comments-o"></i>
+                                            Comments
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content padded">
+                                    <div class="tab-pane active" id="js-comments" role="tabpanel">
+                                        <div class="panel panel-default comment-panel">
+                                            <div class="panel-body">
+                                                <div class="comment-vote-panel text-center">
+                                                    <div class="text-center">
+                                                        <a href="#" data-url="/proposals/oposal_id /comments/ comment.i/up-vote/" class="btn-vote js-proposal-comment-upvote text-muted">
+                                                            <i class="fa fa-chevron-up"></i>
+                                                        </a>
+                                                        <h5 class="text-muted clear-margin vote-count">
+                                                            0
+                                                        </h5>
+                                                        <a href="#" data-url="/cfp/posters-2019/proposals/comment/machine-learning-security/comments/6616/down-vote/" class="btn-vote js-proposal-comment-downvote text-muted">
+                                                            <i class="fa fa-chevron-down"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="comment-description" id="comment-6616">
+                                                    <span><p>Was this intended to be talk or a poster?</p></span>
+
+                                                    <a href="#" data-url="/cfp/posters-2019/proposals/comment/machine-learning-security/comments/6616/mark_spam/" class="js-mark-spam">Mark as spam</a><br><br>
+
+                                                    <b>Vijay Kumar (~bravegnu)</b>
+                                                    <small class="text-muted">
+                                                        <a href="#comment-6616" class="link-disguise"><time datetime="2019-07-02T00:00:11.866576+05:30">15 days ago</time></a>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="add-comment-wrapper">
+                                            <a href="#" class="js-add-comment">add a comment</a>
+                                            <form method="POST" class="new-comment js-new-comment-form" style="display:none;" action="/cfp/posters-2019/proposals/comment/machine-learning-security/create/">
+                                                <input type="hidden" name="csrfmiddlewaretoken" value="cVJ9vnwYRmkQYHCsCYZ32Ey7wXRf3wZZ">
+                                                <link href="/cfp/static/pagedown/demo/browser/demo.css" type="text/css" media="all" rel="stylesheet">
+                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Converter.js"></script>
+                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Sanitizer.js"></script>
+                                                <script type="text/javascript" src="/cfp/static/pagedown/Markdown.Editor.js"></script>
+                                                <script type="text/javascript" src="/cfp/static/pagedown_init.js"></script>
+
+                                                <div class="form-group required"><label class="control-label" for="id_comment">Comment</label>
+                                                    <div class="wmd-wrapper" id="id_comment-wmd-wrapper">
+                                                        <div class="wmd-panel">
+                                                            <!--<div id="id_comment_wmd_button_bar">-->
+                                                                <!--<ul id="wmd-button-row" class="wmd-button-row">-->
+                                                                    <!--<li class="wmd-button" id="wmd-bold-button" title="Strong <strong> Ctrl+B" style="left: 0px;">-->
+                                                                        <!--<span style="background-position: 0px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-italic-button" title="Emphasis <em> Ctrl+I" style="left: 25px;">-->
+                                                                        <!--<span style="background-position: -20px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-link-button" title="Hyperlink <a> Ctrl+L" style="left: 75px;">-->
+                                                                        <!--<span style="background-position: -40px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-quote-button" title="Blockquote <blockquote> Ctrl+Q" style="left: 100px;">-->
+                                                                        <!--<span style="background-position: -60px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-code-button" title="Code Sample <pre><code> Ctrl+K" style="left: 125px;">-->
+                                                                        <!--<span style="background-position: -80px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-image-button" title="Image <img> Ctrl+G" style="left: 150px;">-->
+                                                                        <!--<span style="background-position: -100px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-spacer wmd-spacer2" id="wmd-spacer2"></li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-olist-button" title="Numbered List <ol> Ctrl+O" style="left: 200px;">-->
+                                                                        <!--<span style="background-position: -120px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-ulist-button" title="Bulleted List <ul> Ctrl+U" style="left: 225px;">-->
+                                                                        <!--<span style="background-position: -140px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-heading-button" title="Heading <h1>/<h2> Ctrl+H" style="left: 250px;">-->
+                                                                        <!--<span style="background-position: -160px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule <hr> Ctrl+R" style="left: 275px;">-->
+                                                                        <!--<span style="background-position: -180px 0px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-spacer wmd-spacer3" id="wmd-spacer3"></li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z" style="left: 325px;">-->
+                                                                        <!--<span style="background-position: -200px -20px;"></span>-->
+                                                                    <!--</li>-->
+                                                                    <!--<li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Y" style="left: 350px;">-->
+                                                                        <!--<span style="background-position: -220px -20px;"></span>-->
+                                                                    <!--</li>-->
+                                                                <!--</ul>-->
+                                                            <!--</div>-->
+                                                            <textarea class="form-control wmd-input" cols="40" id="id_comment" name="comment" placeholder="Comment" required="required" rows="10" title=""></textarea>
+                                                        </div>
+
+                                                        <div id="id_comment_wmd_preview" class="wmd-panel wmd-preview"></div>
+
+                                                    </div>
+                                                </div>
+
+                                                <input id="id_private" name="private" type="hidden">
+
+                                                <input id="id_reviewer" name="reviewer" type="hidden">
+
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Add Comment
+                                                    </button>
+                                                    <button type="button" class="btn btn-default js-hide-comment-form">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <script>
+
+                                            $('.js-proposal-upvote, .js-proposal-downvote, .js-proposal-comment-upvote, .js-proposal-comment-downvote').click(function(e){
+                                                e.preventDefault();
+                                                var _that = $(this);
+                                                var url = _that.attr('data-url'),
+                                                    remove_vote_url = _that.attr('data-remove-vote-url');
+                                                if (_that.hasClass('active')){
+                                                    if (!remove_vote_url){
+                                                        return
+                                                     }
+                                                     url = remove_vote_url
+                                                }
+                                                $(_that).siblings('.vote-count').html("...");
+                                                $.post(url, {}, function(result){
+                                                    $(_that).siblings('.btn-vote').removeClass('active');
+                                                    $(_that).toggleClass('active');
+                                                    $(_that).siblings('.vote-count').html(result);
+                                                });
+                                            });
+                                            $('.js-mark-spam').click(function(e){
+                                              e.preventDefault();
+                                              var that = $(this);
+                                              var url = that.attr('data-url');
+                                              $.post(url, {}, function(result){
+                                                console.log(result);
+                                                      location.reload(true);
+                                                  });
+                                            });
 
 
 
-                              </ul>
+                                            $( 'body' ).on( 'click', '.js-add-comment', function(e) {
+                                                e.preventDefault();
 
-                              <div class="tab-content padded">
+                                                var $form = $('.js-new-comment-form');
 
+                                                $form.slideDown(function() {
+                                                    $( e.currentTarget ).hide();
+                                                    $("html, body").animate({ scrollTop: $(document).height() }, 500, function() {
+                                                            $form.find( 'textarea' ).focus();
+                                                        }
+                                                    );
+                                                });
+                                            });
+                                            $( 'body' ).on( 'click', '.js-hide-comment-form', function(e) {
+                                                e.preventDefault();
 
+                                                var $el = $( e.currentTarget ),
+                                                    $form = $el.parents( '.js-new-comment-form' );
 
-
-                              </div>
-                          </div>
+                                                $form.slideUp(function() {
+                                                    $( '.js-add-comment' ).show();
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

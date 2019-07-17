@@ -32,7 +32,7 @@ class Proposals(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Proposals, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = HTMLField()
     created_date = models.DateTimeField(default=datetime.now())
     approved_comment = models.BooleanField(default=False)
 
