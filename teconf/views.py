@@ -16,6 +16,10 @@ def home(request):
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        print("================")
+        print(form.errors)
+        # import pdb
+        # pdb.set_trace()
         if form.is_valid():
             user = form.save()
             user.save()

@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="post">
-    {% csrf_token %}
-    {% for p_type in proposal_types %}
-      <p>
-        {{ p_type.p_type }} <a class="lean" href="{{ p_type.p_type_url }}">Submit a {{ p_type.p_type }}</a> <br>
-      </p>
-    {% endfor %}
-  </form>
+    <main role="main" id="main-content" tabindex="-1">
+        <div class="blog">
+            <h1><strong>Submit a Proposal</strong></h1>
+            <div class="container">
+                {% for p_type in proposal_types %}
+                <div class="row">
+                    <div class="col-md-6 light">
+                        <h3 class="text-uppercase"><strong>{{ p_type.p_type }}</strong></h3>
+                    </div>
+                    <div class="col-md-6 light">
+                        <div class="buy-ticket">
+                            <a href="{{ p_type.p_type_url }}" class="dwd-link text-uppercase"><strong>SUBMIT A {{ p_type.p_type }}</strong></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
 {% endblock %}
+

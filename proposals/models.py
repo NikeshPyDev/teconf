@@ -27,6 +27,7 @@ class Proposals(models.Model):
     created_date = models.DateTimeField()
     updated_date = models.DateTimeField()
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    comments_count = models.IntegerField(default=0)
 
 
 class Comment(models.Model):

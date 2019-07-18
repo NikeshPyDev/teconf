@@ -3,7 +3,7 @@
 
 {% block content %}
   <h2>Login</h2>
-  <form method="post">
+  <form method="post" action="{{ request.get_full_path }}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button> <a href="{% url 'signup' %}">Signup</a>
@@ -13,4 +13,106 @@
   <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
   <p><strong>-- OR --</strong></p>
   <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
+
+
+  <div class="row-fluid clearfix">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+          <!-- ADD has-error class on form-container in case of error -->
+          <div class="form-container space-2-bottom ">
+            <h2 class="text-center">Sign In</h2>
+            <div class="pad-2 push-half-top push-2-bottom">
+              <p align="center">
+                with
+              </p>
+
+              <div class="socialaccount_ballot">
+
+                <div class="text-center">
+                  <a title="Google" class="btn btn-google google" href="{% url 'social:begin' 'google-oauth2' %}">
+                     <span class="fa fa-google"></span>
+                     <span class="name">Google</span>
+                  </a>
+                  /
+                  <a title="GitHub" class="btn btn-github github" href="{% url 'social:begin' 'github' %}">
+                       <span class="fa fa-github"></span>
+                       <span class="name">GitHub</span>
+                  </a>
+                </div>
+
+              <p align="center">
+                or
+              </p>
+                <hr>
+              </div>
+
+              <form class="form-horizontal login-form" method="POST" action="/cfp/accounts/login/">
+            <input type="hidden" name="csrfmiddlewaretoken" value="J4JTGpD4IeZyJZ7Q6PYnGdUoHVaLBbY1">
+
+
+              <div class="form-group">
+
+                  <label for="id_login" class="col-lg-4 control-label">
+                    <label for="id_login">Login:</label>
+                  </label>
+                  <div class="col-lg-8">
+                    <input autofocus="autofocus" id="id_login" name="login" placeholder="Username or e-mail" type="text">
+
+                  </div>
+
+              </div>
+
+              <div class="form-group">
+
+                  <label for="id_password" class="col-lg-4 control-label">
+                    <label for="id_password">Password:</label>
+                  </label>
+                  <div class="col-lg-8">
+                    <input id="id_password" name="password" placeholder="Password" type="password">
+
+                  </div>
+
+              </div>
+
+              <div class="form-group">
+
+                  <div class="col-lg-8 col-lg-offset-4 checkbox">
+                    <input id="id_remember" name="remember" type="checkbox">
+                    <label for="id_remember">Remember Me:</label>
+                  </div>
+
+              </div>
+
+
+
+              <input type="hidden" name="next" value="/cfp/posters-2019/proposals/">
+
+
+            <div class="form-group">
+              <div class="col-lg-8 col-lg-offset-4">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fa fa-sign-in space-on-right"></i>
+                  Sign In
+                </button>
+
+                <a class="button space-on-left-lg" href="/cfp/accounts/password/reset/">
+                    Forgot Password?</a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <hr>
+        <div>
+          Don't have an account? Please <a href="/cfp/accounts/signup/?next=%2Fcfp%2Fposters-2019%2Fproposals%2F">sign up</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+            </div>
+        </div>
+
+
 {% endblock %}

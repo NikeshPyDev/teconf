@@ -158,61 +158,14 @@
                                         {% endfor %}
 
                                         <div class="add-comment-wrapper">
+
                                             <a href="#" class="js-add-comment">add a comment</a>
                                             <form method="POST" class="new-comment js-new-comment-form" style="display:none;" action="{% url 'proposals:post_comment' proposal.proposal_type proposal.id %}">
                                                 {% csrf_token %}
-                                                <!--<link href="/cfp/static/pagedown/demo/browser/demo.css" type="text/css" media="all" rel="stylesheet">-->
-                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Converter.js"></script>-->
-                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Sanitizer.js"></script>-->
-                                                <!--<script type="text/javascript" src="/cfp/static/pagedown/Markdown.Editor.js"></script>-->
-                                                <!--<script type="text/javascript" src="/cfp/static/pagedown_init.js"></script>-->
-
                                                 <div class="form-group required"><label class="control-label" for="id_comment">Comment</label>
                                                     <div class="wmd-wrapper" id="id_comment-wmd-wrapper">
                                                         <div class="wmd-panel">
-                                                            <!--<div id="id_comment_wmd_button_bar">-->
-                                                                <!--<ul id="wmd-button-row" class="wmd-button-row">-->
-                                                                    <!--<li class="wmd-button" id="wmd-bold-button" title="Strong <strong> Ctrl+B" style="left: 0px;">-->
-                                                                        <!--<span style="background-position: 0px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-italic-button" title="Emphasis <em> Ctrl+I" style="left: 25px;">-->
-                                                                        <!--<span style="background-position: -20px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-link-button" title="Hyperlink <a> Ctrl+L" style="left: 75px;">-->
-                                                                        <!--<span style="background-position: -40px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-quote-button" title="Blockquote <blockquote> Ctrl+Q" style="left: 100px;">-->
-                                                                        <!--<span style="background-position: -60px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-code-button" title="Code Sample <pre><code> Ctrl+K" style="left: 125px;">-->
-                                                                        <!--<span style="background-position: -80px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-image-button" title="Image <img> Ctrl+G" style="left: 150px;">-->
-                                                                        <!--<span style="background-position: -100px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-spacer wmd-spacer2" id="wmd-spacer2"></li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-olist-button" title="Numbered List <ol> Ctrl+O" style="left: 200px;">-->
-                                                                        <!--<span style="background-position: -120px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-ulist-button" title="Bulleted List <ul> Ctrl+U" style="left: 225px;">-->
-                                                                        <!--<span style="background-position: -140px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-heading-button" title="Heading <h1>/<h2> Ctrl+H" style="left: 250px;">-->
-                                                                        <!--<span style="background-position: -160px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule <hr> Ctrl+R" style="left: 275px;">-->
-                                                                        <!--<span style="background-position: -180px 0px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-spacer wmd-spacer3" id="wmd-spacer3"></li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z" style="left: 325px;">-->
-                                                                        <!--<span style="background-position: -200px -20px;"></span>-->
-                                                                    <!--</li>-->
-                                                                    <!--<li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Y" style="left: 350px;">-->
-                                                                        <!--<span style="background-position: -220px -20px;"></span>-->
-                                                                    <!--</li>-->
-                                                                <!--</ul>-->
-                                                            <!--</div>-->
+
                                                             <textarea class="form-control wmd-input" cols="40" id="id_comment" name="text" placeholder="Comment" required="required" rows="10" title="">
 
                                                             </textarea>

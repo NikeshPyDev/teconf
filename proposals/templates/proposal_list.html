@@ -1,13 +1,140 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form>
-    {% csrf_token %}
-        <a class="lean" href="{% url 'proposals:new_proposal' data.proposal_type %}">New Proposal</a>
-    {% for proposal in data.proposals %}
-      <p>
-        <a href="{% url 'proposals:view_proposal' proposal.proposal_type proposal.id  %}">{{ proposal.title }}</a> <br>
-      </p>
-    {% endfor %}
-  </form>
+
+
+
+    <div class="container-fluid" role="main">
+        <div class="row-fluid clearfix">
+            <div class="col-md-10 col-md-offset-1">
+
+                <section class="content custom-container proposal-list">
+                    <div class="push-4-bottom push-1-top">
+                        <div class="row">
+                            <div class="col-xs -12 col-sm-12 ">
+
+                                        <p class="text-left"></p>
+                                        <h1>Proposals</h1>
+
+                                        <p>Posters are graphical summary of projects or ideas. They are usually presented with an A0 size poster, but any creative ways are always welcome. The poster session provides an opportunity to network with the conference attendees and acts as a starting point for further discussions. While talks generally needs to appeal to a wide section of the community, posters can cover niche topics.   </p>
+                                        <p>PyCon India 2019 will be having a poster presentation session at post lunch, day 1. During the poster presentation session you will be provided with a poster board that can hold an A0 size poster, and a table to place your laptop, for demos. Conference attendees interested in your topic, will stop by, during which you can give them a brief presentation / demo.  </p>
+                                        <h2>Timeline</h2>
+                                        <ul>
+                                        <li>Poster CFP opens: 3rd June, 2019  </li>
+                                        <li>Poster CFP closes: 31 August, 2019  </li>
+                                        <li>Selected posters announced: 14th September, 2019  </li>
+                                        <li>Draft posters to be submitted On: 15th September, 2019  </li>
+                                        <li>Posters will be presented on: 12th October, 2019  </li>
+                                        </ul>
+                                        <h2>FAQ</h2>
+                                        <h3>What is the difference between a talk and a poster?</h3>
+                                        <p>Talks and posters are different ways of interacting with the conference audience. A topic can be presented as talk, if the intention is to explain the topic in detail. A poster on the other hand, is similar to a lightning talk, in that it quickly introduces the audience to a topic, and acts as trigger point for further discussion.  </p>
+                                        <p>There are some specific cases where posters are better suited than talks:  </p>
+                                        <ul>
+                                        <li>
+                                        <p>Due to the nature of the poster presentation format, it is better suited for demos, the attendees can interact with the project. This is especially useful for hardware projects.  </p>
+                                        </li>
+                                        <li>
+                                        <p>If you are first time conference attendee, or a first time speaker at a conference, posters let you engage with the audience without getting intimidated by the large crowd.  </p>
+                                        </li>
+                                        <li>
+                                        <p>Niche topics that are domain heavy, are better suited as posters. Examples: Python in local language computing, Python in embedded Linux build automation, Python used in scientific study of ailments, etc.  </p>
+                                        </li>
+                                        </ul>
+                                        <h3>Can I submit both a talk and a poster proposal?</h3>
+                                        <p>You can submit a talk and poster proposal for the same topic. If your talk does not get selected, you can use the poster session, to introduce your topic, and engage with the audience. Given the limited space and time at the conference, only one of them will get selected though.  </p>
+                                        <h3>What makes a good poster?</h3>
+                                        <p>First, ensure that you select a good title. Conference attendees will use it to determine which posters to attend. Make sure it brings in audience who will be interested in your poster.   </p>
+                                        <p>Second, for the poster itself, here are a few tips for creating the poster:  </p>
+                                        <ul>
+                                        <li>While textual representation is good, graphical representation will attract more eyes  </li>
+                                        <li>Make sure the contents are properly sized and spaced in the poster so that it is viewable from decent distance  </li>
+                                        <li>Provoke the reader's curiosity which will open up space for further discussions  </li>
+                                        <li>Provide links for the attendees to know more about the topic and connect with you / the community  </li>
+                                        </ul>
+                                        <h3>Do you have sample poster proposals to get started?</h3>
+                                        <p>You can check the poster proposals from other conferences:  </p>
+                                        <ul>
+                                        <li><a href="https://pysangamam.org/blog/2018/08/29/announcing-selected-posters/">PySangamam 2018</a></li>
+                                        <li><a href="https://us.pycon.org/2019/schedule/posters/list/">PyCon US 2019</a></li>
+                                        </ul>
+                                        <h3>Can I do a poster in a local language?</h3>
+                                        <p>Yes! Since attendees can choose which poster they want to attend, your poster can be in a local language. This makes sense only if there will be sufficient no. of participants who are familiar with the language. This can also be done, if the topic is itself about projects / libraries on regional language computing. Please be noted that the proposal itself needs to be in English, for the reviewers to be able to comprehend your proposal.  </p>
+                                        <h2>Questions and Discussions</h2>
+                                        <p>Contact the coordinators through email:<br>
+                                        Naren - narenravi92@gmail.com <br>
+                                        Abhishek - zerothabhishek@gmail.com<br>
+                                        The team: cfp@in.pycon.org</p><p></p>
+
+
+
+                            </div>
+                        </div>
+
+                        <hr>
+                        <a name="proposals"></a>
+                        <div class="row">
+                            <a class="btn btn-primary pull-right" href="{% url 'proposals:new_proposal' data.proposal_type %}">
+                                <i class="fa fa-plus-square-o"></i> New Proposal
+                            </a>
+
+                        </div>
+                        <h2 class="section-title">List of Proposals</h2>
+
+                        {% for proposal in data.proposals %}
+                        <hr/>
+                        <div class="row user-proposals">
+                            <div class="col-xs-12">
+                                <div class="proposal-list-content">
+                                  <div class="col-sm-1 hidden-xs proposal-stats">
+
+                                        <div class="text-center space-on-top">
+                                            <i class="fa fa-comments-o"></i>
+                                            <span class="align-middle">
+                                                {{ proposal.comments_count }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-11 col-xs-12">
+                                        <p class="col-xs-12  visible-xs">
+                                            <span class="pull-left">
+                                                <i class="fa fa-comments"></i>2
+                                            </span>
+                                            <span class="pull-right">
+                                                <i class="fa fa-thumbs-up"></i>0
+                                            </span>
+                                        </p>
+                                        <h3 class="proposal--title">
+                                            <a href="{% url 'proposals:view_proposal' proposal.proposal_type proposal.id %}">{{ forloop.counter }}. {{ proposal.title }}</a>
+                                        </h3>
+                                        <div class="clearfix">
+                                            <div class="pull-left">
+
+                                                <span></span>
+                                                <a class="tag tag__proposal_type label label-proposal-type inline-block" href="?proposal_type=19#proposals">{{ proposal.proposal_type }}
+                                                </a>
+
+                                                <a class="tag tag__proposal_section label label-proposal-type inline-block" href="?proposal_section=95#proposals">{{ proposal.proposal_section }}
+                                                </a>
+                                            </div>
+
+                                            <small class="pull-right">
+                                                <i class="fa fa-user"></i><b>{{ proposal.author_id }}</b> |&nbsp;
+                                                <i class="fa fa-calendar"></i> <b title="11 Jun 2019, 22:36">{{ proposal.created_date }}</b>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

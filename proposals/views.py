@@ -103,6 +103,8 @@ def post_comments(request, proposal_type, proposal_id):
     text = request.POST.get('text')
     comment = Comment(proposal=proposal, author=request.user, text=text)
     comment.save()
+    proposal.comments_count += 1
+    proposal.save()
     return redirect('/proposals/'+proposal_type + '/' + str(proposal_id))
 
 

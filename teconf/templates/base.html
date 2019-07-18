@@ -4,7 +4,8 @@
         <title>TeConf</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script src="{% static 'js/jquery-1.11.0.js' %}"></script>
         <!--<link rel="stylesheet" href="{% static 'css/blog.css' %}">-->
         {% load bootstrap_tags %}
@@ -27,23 +28,20 @@
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="#" class="navbar-brand">Talks 2019</a>
-
-
-
-                    </div>
+                    <!--<div class="navbar-header">-->
+                        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">-->
+                            <!--<span class="sr-only">Toggle navigation</span>-->
+                            <!--<span class="icon-bar"></span>-->
+                            <!--<span class="icon-bar"></span>-->
+                            <!--<span class="icon-bar"></span>-->
+                        <!--</button>-->
+                        <!--<a href="#" class="navbar-brand">Talks 2019</a>-->
+                    <!--</div>-->
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <!--<div class="collapse navbar-collapse" id="navbar-collapse-1">-->
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
+                        <!--<ul class="nav navbar-nav navbar-right">-->
+                            <!--<li class="dropdown">-->
 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     {% if user.is_authenticated %}
@@ -53,15 +51,15 @@
                                         <a class="lead" href="{% url 'login' %}">Log in</a>
                                     {% endif %}
                                 </a>
-                                <ul class="dropdown-menu" role="menuitem">
-                                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                                </ul>
+                                <!--<ul class="dropdown-menu" role="menuitem">-->
+                                        <!--<li><a href="{% url 'logout' %}">Logout</a></li>-->
+                                <!--</ul>-->
 
-                            </li>
-                        </ul>
+                            <!--</li>-->
+                        <!--</ul>-->
 
 
-                    </div>
+                    <!--</div>-->
                     <!-- /.navbar-collapse -->
                 </div>
                 <!-- /.container -->
@@ -85,7 +83,21 @@
 
                 {% block content %}
                 {% endblock %}
+
+            </div>
+            <div class="row">
+                <br/><br/>
             </div>
         </div>
+
+        <footer>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="col-xs-12 text-center">
+                        <p class="push-half-top clear-margin">© 2019 • PrathidhwaniTechForm • Powered by <a href="http://www.techforum.prathidhwani.org/">Prathidhwani Technical Forum</a></p>
+                    </div>
+                </div><!-- /.row -->
+            </div>
+        </footer>
     </body>
 </html>
