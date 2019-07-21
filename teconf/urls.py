@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('auth/', include('social_django.urls', namespace='social')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', home, name='home'),
     path('proposals/', include(('proposals.urls', 'proposals'), namespace='proposals-types')),
     path('tinymce/', include('tinymce.urls')),

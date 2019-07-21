@@ -161,3 +161,11 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''  # Paste Secret Key
 
 SOCIAL_AUTH_GITHUB_KEY = '88b252165ed0f28b4f4f'  # Paste Client ID
 SOCIAL_AUTH_GITHUB_SECRET = '0ba1b195cd66dcb4783faa4c5e10ce1b8d6bb17e'  # Paste Secret Key
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '*********@gmail.com'
+EMAIL_HOST_PASSWORD = '*******'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Prathidhwani TechForum <noreply@example.com>'
