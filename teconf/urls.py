@@ -17,14 +17,14 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import signup, home
+from .views import signup, home, logout_user
 # import proposals.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup, name='signup'),
     path('login/', LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', logout_user, name='logout_user'),
     path('auth/', include('social_django.urls', namespace='social')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', home, name='home'),

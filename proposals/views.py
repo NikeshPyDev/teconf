@@ -4,6 +4,8 @@ from .models import PROPOSAL_TYPES, Proposals, Comment
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from datetime import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def generate_prposal_type_url(p_type):
@@ -56,8 +58,11 @@ class ProposalView(TemplateView):
 
 class ProposalEditView(TemplateView):
     form_class = ProposalForm
+    redirect_field_name = "/proposals/"
 
     def get(self, request, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('login'))
         proposal_id = kwargs.get('proposal_id', None)
         proposal_type = kwargs.get('proposal_type', None)
         bread_crumbs = []
@@ -79,9 +84,7 @@ class ProposalEditView(TemplateView):
                 'proposals': Proposals.objects.all()}
         bread_crumbs = []
         if proposal_form.is_valid():
-            if request.POST.get('proposal_id'):
-                # import pdb
-                # pdb.set_trace()
+            if request.POST.get('proposal_id', None) and (request.POST.get('proposal_id') != 'None'):
                 proposal = Proposals.objects.get(id=request.POST.get('proposal_id'))
                 self.form_class(request.POST, instance=proposal).save(commit=False)
                 proposal.updated_date = datetime.now()

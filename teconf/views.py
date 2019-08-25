@@ -5,12 +5,21 @@ from django.shortcuts import render, redirect
 # from django.utils.http import urlsafe_base64_encode
 from .forms import SignUpForm
 from django.contrib.auth import authenticate
-from django.contrib.auth.views import auth_login
+from django.contrib.auth.views import auth_login, auth_logout
 # from django.contrib.auth.tokens import default_token_generator
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def home(request):
-    return render(request, 'home.html')
+    return HttpResponseRedirect(reverse('proposals:proposal_types'))
+    # return render(request, 'home.html')
+
+
+def logout_user(request):
+    auth_logout(request)
+    return HttpResponseRedirect(reverse('proposals:proposal_types'))
+    # return render(request, 'home.html')
 
 
 def signup(request):
@@ -18,8 +27,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         print("================")
         print(form.errors)
-        # import pdb
-        # pdb.set_trace()
+
         if form.is_valid():
             user = form.save()
             user.save()
