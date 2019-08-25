@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  teconf_web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: teconf_project
+    volumes:
+      - .:/teconf_project
+    ports:
+      - "8000:8000"

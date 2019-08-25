@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dotenv
+from django.core.exceptions import ImproperlyConfigured
+
+DOTENV_FILE_DEFAULT = '/opt/teconf_project/.teconf.env'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dotenv.load_dotenv(os.environ.get('DOTENV', DOTENV_FILE_DEFAULT))
 
 
 # Quick-start development settings - unsuitable for production
@@ -79,25 +84,46 @@ DJANGO_WYSIWYG_FLAVOR = "tinymce"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+
+def get_env_var(key, default=None):
+    try:
+        return os.environ[key]
+    except KeyError:
+        if default:
+            return default
+        error = "Missing the '{}' environment variable!".format(key)
+        raise ImproperlyConfigured(error)
+
+
+DB_NAME = get_env_var('DB_NAME')
+DB_USER_NAME = get_env_var('DB_USER_NAME')
+DB_PASSWORD = get_env_var('DB_PASSWORD')
+DB_HOST = get_env_var('DB_HOST')
+DB_PORT = get_env_var('DB_PORT')
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "teconf",
-        "USER": "teconf",
-        "PASSWORD": "teconf",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": DB_NAME,
+        "USER": DB_USER_NAME,
+        "PASSWORD": DB_PASSWORD,
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
         # "CONN_MAX_AGE": 300,
     }
 }
 
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "teconf",
+#         "USER": "teconf",
+#         "PASSWORD": "teconf",
+#         "HOST": "localhost",
+#         "PORT": 5432,
+#         # "CONN_MAX_AGE": 300,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -156,16 +182,16 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''  # Paste CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''  # Paste Secret Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = get_env_var('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')  # Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = get_env_var('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')  # Paste Secret Key
 
-SOCIAL_AUTH_GITHUB_KEY = '88b252165ed0f28b4f4f'  # Paste Client ID
-SOCIAL_AUTH_GITHUB_SECRET = '0ba1b195cd66dcb4783faa4c5e10ce1b8d6bb17e'  # Paste Secret Key
+SOCIAL_AUTH_GITHUB_KEY = get_env_var('SOCIAL_AUTH_GITHUB_KEY')  # Paste Client ID
+SOCIAL_AUTH_GITHUB_SECRET = get_env_var('SOCIAL_AUTH_GITHUB_SECRET')  # Paste Secret Key
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = '*****@gmail.com'
-EMAIL_HOST_PASSWORD = '******'
+EMAIL_BACKEND = get_env_var('EMAIL_BACKEND')
+EMAIL_HOST = get_env_var('EMAIL_HOST')
+EMAIL_PORT = get_env_var('EMAIL_PORT')
+EMAIL_HOST_USER = get_env_var('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = get_env_var('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Prathidhwani TechForum Team <noreply@example.com>'
+DEFAULT_FROM_EMAIL = get_env_var('DEFAULT_FROM_EMAIL')
